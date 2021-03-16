@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates a role in the organization master that allows DivvyCloud to list/describe member accounts.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: DivvyCloud Organization Role
+        Parameters:
+          - RoleName
+          - PolicyName
+          - RoleToTrust
+
+    ParameterLabels:
+      RoleName:
+        default: Name of organization role to create
+      PolicyName:
+        default: Name of organization policy to create
+      RoleToTrust:
+        default: DivvyCloud install role to trust
+
+Parameters:
+  RoleName:
+    Type: String
+    Default: 'DivvyCloud-Org-ListDesc-Role'
+    Description: Name of organization role to create in master account
+
+  PolicyName:
+    Type: String
+    Default: 'DivvyCloud-Org-ListDesc-Policy'
+    Description: Name of policy to create/associate with organization role
+
+  RoleToTrust:
+    Type: String
+    Default: 'arn:aws:iam::XXXXXXXXXXXX:role/DivvyCloud-Standard-Role'
+    Description: ARN of the role used by the DivvyCloud install. This will be trusted by the organization role.
+
+Resources:
+  OrganizationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref RoleName
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: [!Ref RoleToTrust]
+          Action: sts:AssumeRole
+
+  DivvyCloudStandardPolicy1:
+    DependsOn: 
+        - OrganizationRole 
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: !Ref PolicyName
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action:
+            - iam:SimulatePrincipalPolicy
+            - organizations:DescribeOrganization
+            - organizations:ListAccountsForParent
+            - organizations:ListOrganizationalUnitsForParent
+            - organizations:ListPolicies
+            - organizations:ListRoots
+            - organizations:ListTagsForResource
+            - organizations:ListTargetsForPolicy
+            Effect: Allow
+            Resource: '*'
+      Roles:
+        - !Ref OrganizationRole
+
+Outputs:
+  OrganizationRoleARN:
+      Description: Organization Role ARN
+      Value:
+        Fn::GetAtt:
+        - OrganizationRole
+        - Arn
