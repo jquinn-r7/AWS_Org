@@ -675,8 +675,8 @@ Resources:
             - workspaces:DescribeWorkspaceDirectories
             - workspaces:DescribeWorkspaces
             - workspaces:DescribeWorkspacesConnectionStatus
-           Effect: Allow
-           Resource: '*'
+            Effect: Allow
+            Resource: '*'
 
   Role:
     Type: AWS::IAM::Role
