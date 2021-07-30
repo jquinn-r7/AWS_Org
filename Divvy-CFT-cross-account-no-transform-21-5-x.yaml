@@ -549,6 +549,9 @@ Resources:
             - logs:DescribeDestinations
             - logs:DescribeLogGroups
             - logs:DescribeMetricFilters
+            - macie2:GetMacieSession
+            - macie2:GetFindings
+            - macie2:ListFindings
             - mq:DescribeBroker
             - mq:ListBrokers
             - organizations:DescribeOrganization
