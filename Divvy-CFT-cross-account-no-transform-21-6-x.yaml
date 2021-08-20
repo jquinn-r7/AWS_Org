@@ -290,6 +290,9 @@ Resources:
             - airflow:GetEnvironment
             - airflow:ListEnvironments
             - apigateway:GET
+            - apprunner:DescribeService
+            - apprunner:ListServices
+            - timestream:ListDatabases
             - appsync:ListGraphqlApis
             - appsync:GetApiCache
             - athena:GetWorkGroup
