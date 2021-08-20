@@ -292,7 +292,6 @@ Resources:
             - apigateway:GET
             - apprunner:DescribeService
             - apprunner:ListServices
-            - timestream:ListDatabases
             - appsync:ListGraphqlApis
             - appsync:GetApiCache
             - athena:GetWorkGroup
@@ -403,10 +402,12 @@ Resources:
             - ecr:ListTagsForResource
             - ecs:DescribeClusters
             - ecs:DescribeContainerInstances
+            - ecs:DescribeServices
             - ecs:DescribeTaskDefinition
             - ecs:DescribeTasks
             - ecs:ListClusters
             - ecs:ListContainerInstances
+            - ecs:ListServices
             - ecs:ListTaskDefinitions
             - ecs:ListTasks
             - eks:DescribeCluster
@@ -439,6 +440,7 @@ Resources:
             - elasticache:ListTagsForResource
             - elasticfilesystem:DescribeBackupPolicy
             - elasticfilesystem:DescribeFileSystems
+            - elasticfilesystem:DescribeFileSystemPolicy
             - elasticfilesystem:DescribeLifecycleConfiguration
             - elasticfilesystem:DescribeMountTargetSecurityGroups
             - elasticfilesystem:DescribeMountTargets
@@ -673,6 +675,7 @@ Resources:
             - sts:GetCallerIdentity
             - support:*
             - tag:GetResources
+            - timestream:ListDatabases
             - transfer:DescribeServer
             - transfer:DescribeUser
             - transfer:ListServers
