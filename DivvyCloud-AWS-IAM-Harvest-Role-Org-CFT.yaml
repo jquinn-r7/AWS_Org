@@ -1,12 +1,11 @@
-#Test
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Creates a role in the organization master that allows DivvyCloud to list/describe member accounts.
+Description: Creates a role in the organization master that allows InsightCloudSec to list/describe member accounts.
 
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: DivvyCloud Organization Role
+          default: InsightCloudSec Organization Role
         Parameters:
           - RoleName
           - PolicyName
@@ -18,23 +17,23 @@ Metadata:
       PolicyName:
         default: Name of organization policy to create
       RoleToTrust:
-        default: DivvyCloud install role to trust
+        default: InsightCloudSec install role to trust
 
 Parameters:
   RoleName:
     Type: String
-    Default: 'DivvyCloud-Org-ListDesc-Role'
+    Default: 'ICS-Org-ListDesc-Role'
     Description: Name of organization role to create in master account
 
   PolicyName:
     Type: String
-    Default: 'DivvyCloud-Org-ListDesc-Policy'
+    Default: 'ICS-Org-ListDesc-Policy'
     Description: Name of policy to create/associate with organization role
 
   RoleToTrust:
     Type: String
-    Default: 'arn:aws:iam::XXXXXXXXXXXX:role/DivvyCloud-Standard-Role'
-    Description: ARN of the role used by the DivvyCloud install. This will be trusted by the organization role.
+    Default: 'arn:aws:iam::625820357955:root'
+    Description: ARN of the role used by the InsightCloudSec install. This will be trusted by the organization role.
 
 Resources:
   OrganizationRole:
