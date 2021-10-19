@@ -1,9 +1,9 @@
-#CFT for creating a cross account role to be used with your DivvyCloud instances. This is for the external accounts
-#(not the local account that is running the DivvyCloud tenant)
+#CFT for creating a cross account role to be used with your InsightCloudSec instances. This is for the external accounts
+#(not the local account that is running the InsightCloudSec tenant)
 #https://docs.divvycloud.com/docs/instance-assume-role-aws
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: This template creates a cross account role to allow DivvyCloud to connect to this account if the software is running in a different account
+Description: This template creates a cross account role to allow InsightCloudSec to connect to this account if the software is running in a different account
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -27,15 +27,15 @@ Metadata:
       ExternalId:
         default: "External ID"
       SourceAccountId:
-        default: "Source Account ID (where DivvyCloud is running)"
+        default: "Source Account ID (where InsightCloudSec is running)"
 
 Parameters:
   ExternalId:
     Type: String
-    Default: divvycloud
+    Default: insightcloudsec
     AllowedPattern: '\S+'
     ConstraintDescription: Please enter an external ID
-    Description: Enter Divvy External ID
+    Description: Enter InsightCloudSec External ID
   SourceAccountId:
     Type: String
     AllowedPattern: \d{12}
@@ -54,14 +54,14 @@ Parameters:
       - None
       - Consumer
       - Producer
-    Description: Permissions to enable DivvyCloud to configure Event Driven Harvesting (EDH)
+    Description: Permissions to enable InsightCloudSec to configure Event Driven Harvesting (EDH)
   OrgID:
     Type: String
     Description: Enter the organization ID for this account. Only needed if this is being set up for the EDH Consumer
   RoleName:
     Type: String
     Description: Enter the name for the Role 
-    Default: DivvyCloudCrossAccountRole
+    Default: ICSCrossAccountRole
     AllowedPattern: '\S+'
 
 Conditions:
@@ -77,7 +77,7 @@ Resources:
       - Role
     Type: 'AWS::IAM::ManagedPolicy'
     Properties:
-      ManagedPolicyName: DivvyCloud-CloudWatchPutMetricLogs-Policy
+      ManagedPolicyName: ICS-CloudWatchPutMetricLogs-Policy
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -100,7 +100,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddEDHConsumer
     Properties:
-      ManagedPolicyName: DivvyCloudEDHConsumer
+      ManagedPolicyName: ICSEDHConsumer
       Roles:
       - Ref: Role
       PolicyDocument:
@@ -148,7 +148,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddEDHProducer
     Properties:
-      ManagedPolicyName: DivvyCloudEDHProducer
+      ManagedPolicyName: ICSEDHProducer
       Roles:
       - Ref: Role
       PolicyDocument:
@@ -184,7 +184,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddPowerUser
     Properties:
-      ManagedPolicyName: DivvyCloud-PowerUser-Policy
+      ManagedPolicyName: ICS-PowerUser-Policy
       Roles:
       - Ref: Role
       PolicyDocument:
@@ -275,7 +275,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddStandardUser
     Properties:
-      ManagedPolicyName: DivvyCloudStandardUserPolicy1
+      ManagedPolicyName: ICSStandardUserPolicy1
       Roles:
       - Ref: Role
       PolicyDocument:
@@ -420,7 +420,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddStandardUser
     Properties:
-      ManagedPolicyName: DivvyCloudStandardUserPolicy2
+      ManagedPolicyName: ICSStandardUserPolicy2
       Roles:
       - Ref: Role
       PolicyDocument:
@@ -574,7 +574,7 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Condition: AddStandardUser
     Properties:
-      ManagedPolicyName: DivvyCloudStandardUserPolicy3
+      ManagedPolicyName: ICSStandardUserPolicy3
       Roles:
       - Ref: Role
       PolicyDocument:
