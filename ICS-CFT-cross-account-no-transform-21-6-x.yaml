@@ -301,6 +301,7 @@ Resources:
             - autoscaling:DescribeTags
             - backup:GetBackupVaultAccessPolicy
             - backup:ListBackupVaults
+            - batch:DescribeComputeEnvironments
             - cloudformation:DescribeStackResource
             - cloudformation:DescribeStackResources
             - cloudformation:DescribeStacks
@@ -557,6 +558,9 @@ Resources:
             - macie2:GetMacieSession
             - macie2:GetFindings
             - macie2:ListFindings
+            - memorydb:DescribeClusters
+            - memorydb:DescribeSubnetGroups
+            - memorydb:ListTags
             - mq:DescribeBroker
             - mq:ListBrokers
             - organizations:DescribeOrganization
@@ -605,6 +609,7 @@ Resources:
             - redshift:DescribeLoggingStatus
             - redshift:DescribeTags
             - route53:GetHostedZone
+            - route53:GetDNSSEC
             - route53:ListGeoLocations
             - route53:ListHealthChecks
             - route53:ListHostedZones
@@ -663,6 +668,7 @@ Resources:
             - sqs:GetQueueAttributes
             - sqs:ListQueueTags
             - sqs:ListQueues
+            - ssm:DescribeDocument
             - ssm:DescribeParameters
             - ssm:GetDocument
             - ssm:GetServiceSetting
@@ -675,7 +681,9 @@ Resources:
             - sts:GetCallerIdentity
             - support:*
             - tag:GetResources
+            - timestream:DescribeEndpoints
             - timestream:ListDatabases
+            - timestream:ListTables
             - transfer:DescribeServer
             - transfer:DescribeUser
             - transfer:ListServers
